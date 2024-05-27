@@ -31,11 +31,10 @@ def matrix_calculation(sender, instance, created, **kwargs):
             )
         
         vendor = instance.vendor
-
-        vendor.on_time_delivery_rate = po_dict.get('on_time_delivery_rate', vendor.on_time_delivery_rate)
-        vendor.quality_rating_avg = po_dict.get('quality_rating_avg', vendor.quality_rating_avg)
-        vendor.average_response_time = po_dict.get('average_response_time', vendor.average_response_time)
-        vendor.fulfillment_rate = po_dict.get('fullfillment_rate', vendor.fulfillment_rate)
+        vendor.on_time_delivery_rate =  po_dict.get('on_time_delivery_rate') if po_dict.get('on_time_delivery_rate') else 0.0
+        vendor.quality_rating_avg =   po_dict.get('quality_rating_avg') if po_dict.get('quality_rating_avg') else 0.0
+        vendor.average_response_time =   po_dict.get('average_response_time') if po_dict.get('average_response_time') else 0.0
+        vendor.fulfillment_rate = po_dict.get('fullfillment_rate') if po_dict.get('fullfillment_rate') else 0.0 
         vendor.save()
 
         Matrix.objects.create(
